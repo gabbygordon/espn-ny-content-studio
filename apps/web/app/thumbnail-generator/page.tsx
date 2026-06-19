@@ -4,6 +4,8 @@ export default function ThumbnailGenerator() {
      const [headline, setHeadline] = useState("AARON JUDGE OUT");
      const [subheadline, setSubheadline] = useState("");
      const [show, setShow] = useState("Michael Kay Show");
+     const [playerImage, setPlayerImage] = useState("");
+     const [backgroundImage, setBackgroundImage] = useState("");
   return (
     <main className="min-h-screen bg-black text-white p-8">
       <h1 className="text-4xl font-bold mb-8">
@@ -48,14 +50,24 @@ onChange={(e) => setSubheadline(e.target.value)}
           </div>
 
           <div>
-            <label className="block mb-2">Image URL</label>
-            <input
-              className="w-full p-3 rounded bg-zinc-900 border border-zinc-700"
-              placeholder="https://..."
-            />
-          </div>
-
-          <button className="bg-red-600 px-6 py-3 rounded font-bold">
+            <div>
+  <label className="block mb-2">Player Image URL</label>
+  <input
+    className="w-full p-3 rounded bg-zinc-900 border border-zinc-700"
+    placeholder="https://..."
+    value={playerImage}
+    onChange={(e) => setPlayerImage(e.target.value)}
+  />
+</div>
+  <label className="block mb-2">Background Image URL</label>
+  <input
+    className="w-full p-3 rounded bg-zinc-900 border border-zinc-700"
+    placeholder="https://..."
+    value={backgroundImage}
+    onChange={(e) => setBackgroundImage(e.target.value)}
+  />
+</div>
+      <button className="bg-red-600 px-6 py-3 rounded font-bold">
             Generate Thumbnail
           </button>
         </div>
@@ -64,8 +76,22 @@ onChange={(e) => setSubheadline(e.target.value)}
         <div className="bg-zinc-900 border border-zinc-700 rounded-lg p-6">
           <h2 className="text-xl font-bold mb-4">Preview</h2>
 
-         <div className="aspect-video bg-gradient-to-br from-blue-900 to-black rounded flex items-center justify-center text-center p-6">
+         <div
+  className="aspect-video rounded flex items-center justify-center text-center bg-cover bg-center"
+  style={{
+    backgroundImage: backgroundImage
+      ? `url(${backgroundImage})`
+      : undefined,
+  }}
+>
   <div>
+    {playerImage && (
+  <img
+    src={playerImage}
+    alt="Player"
+    className="w-48 h-48 object-cover rounded-full mb-4"
+  />
+)}
     <div className="inline-block mt-4 bg-red-600 px-3 py-1 rounded font-bold">
   {show}
 </div>
